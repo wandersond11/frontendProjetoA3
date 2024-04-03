@@ -1,11 +1,16 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {LoadingContext} from "../../context/Loading";
-import {Button, IconButton, Input, Link, Text} from "@chakra-ui/react";
+import {Button, Link, Text} from "@chakra-ui/react";
 import './styles.scss'
 import {CustomInput} from "../../components/atoms/CustomInput/CustomInput";
-import {formatCep} from "../../util/formatCep";
+import {formatCep} from "../../util/format";
+import painelSolar1 from '../../assets/painel-solar-1.jpg'
+import painelSolar2 from '../../assets/painel-solar-2.jpg'
+import painelSolar3 from '../../assets/painel-solar-3.jpg'
+import painelSolar4 from '../../assets/painel-solar-4.jpg'
 import {CheckIcon} from '@chakra-ui/icons';
 import colors from '../../constants/colors';
+
 export const Home = () => {
     const {setLoading} = useContext(LoadingContext)
 
@@ -13,6 +18,7 @@ export const Home = () => {
     const [media, setMedia] = useState()
     const [custo, setCusto] = useState()
     const [cep, setCep] = useState()
+    const [endereco, setEndereco] = useState()
     const [months, setMonths] = useState({
         jan: 0,
         fev: 0,
@@ -25,29 +31,46 @@ export const Home = () => {
         set: 0,
         out: 0,
         nov: 0,
-        dez: 0,
+        dez: 0
     })
+
+    useEffect(() => {
+        if (cep?.length === 9) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://viacep.com.br/ws/" + cep + "/json/");
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    setEndereco(JSON.parse(xhr.responseText));
+                } else {
+                    alert("CEP inválido!");
+                }
+            };
+            xhr.send();
+
+            console.log(endereco)
+        }
+    }, [cep])
 
     const cards = [
         {
             title: "LOREM IPSUM",
             text: "Lorem ipsum dolor sit amet",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjlS7FUuqmEeKh-0KHUhObZzTaUiTMAhaGaTdHJ6b87A&s",
+            image: painelSolar1,
         },
         {
             title: "LOREM IPSUM",
             text: "Lorem ipsum dolor sit amet",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjlS7FUuqmEeKh-0KHUhObZzTaUiTMAhaGaTdHJ6b87A&s",
+            image: painelSolar2,
         },
         {
             title: "LOREM IPSUM",
             text: "Lorem ipsum dolor sit amet",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjlS7FUuqmEeKh-0KHUhObZzTaUiTMAhaGaTdHJ6b87A&s",
+            image: painelSolar3,
         },
         {
             title: "LOREM IPSUM",
             text: "Lorem ipsum dolor sit amet",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjlS7FUuqmEeKh-0KHUhObZzTaUiTMAhaGaTdHJ6b87A&s",
+            image: painelSolar4,
         },
     ]
 
@@ -59,11 +82,14 @@ export const Home = () => {
     }
 
     return (
-        <div className="home-container">
+        <div
+            className="home-container"
+            style={{background: colors.secondary}}
+        >
             <div className="calc">
                 {showMonths ?
                     <aside>
-                        <Text>Media mensal de consumo (kWh)</Text>
+                        <Text color="white">Media mensal de consumo (kWh)</Text>
                         <aside>
                             {Object.keys(months).map((key) => {
                                 return (
@@ -80,13 +106,14 @@ export const Home = () => {
                                 )
                             })}
                         </aside>
-                        <Button onClick={calcularMedia}>
+                        <Button rightIcon={<CheckIcon/>} onClick={calcularMedia}>
                             Confirmar
                         </Button>
                     </aside> :
                     <aside>
                         <CustomInput
                             label="Media mensal de consumo (kWh)"
+                            prefix="kWh"
                             value={media}
                             onChange={(e) => setMedia(e.target.value)}
                         />
@@ -101,14 +128,35 @@ export const Home = () => {
                 }
                 <CustomInput
                     label="Custo por kWh"
+                    prefix="R$"
                     value={custo}
-                    onChange={(e) => setCusto(`R$ ${e.target.value}`)}
+                    onChange={(e) => setCusto(e.target.value)}
                 />
                 <CustomInput
                     label="CEP"
                     value={cep}
+                    placeholder="00000-000"
+                    maxLength={9}
                     onChange={(e) => setCep(formatCep(e.target.value))}
                 />
+                {endereco && <>
+                    <CustomInput
+                        label="Cidade"
+                        value={endereco.localidade}
+                    />
+                    <CustomInput
+                        label="Estado"
+                        value={endereco.uf}
+                    />
+                    <CustomInput
+                        label="Bairro"
+                        value={endereco.bairro}
+                    />
+                    <CustomInput
+                        label="Rua"
+                        value={endereco.logradouro}
+                    />
+                </>}
             </div>
             <div className="cards">
                 {cards.map((card) => {
