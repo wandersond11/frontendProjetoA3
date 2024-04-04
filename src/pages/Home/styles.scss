@@ -8,35 +8,39 @@
 }
 
 .calc {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #00000050;
-  width: 700px;
-  gap: 8px;
-  margin: 170px 0;
-  border-radius: 6px;
-  padding: 2rem;
+  margin: auto 0;
 
-  & > * {
-    width: 100%;
-  }
-
-  & > aside {
+  & > div {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #00000050;
+    width: 700px;
+    gap: 8px;
+    margin: 50px;
+    border-radius: 6px;
+    padding: 2rem;
 
-    & > aside {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-      gap: 4px;
-      column-gap: 8px;
+    & > * {
+      width: 100%;
     }
 
-    & > button {
-      margin-top: 8px;
-      width: 100%;
+    & > aside {
+      display: flex;
+      flex-direction: column;
+
+      & > aside {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 4px;
+        column-gap: 8px;
+      }
+
+      & > button {
+        margin-top: 8px;
+        width: 100%;
+      }
     }
   }
 }
@@ -93,5 +97,15 @@
         color: lightgray;
       }
     }
+  }
+}
+
+button {
+  &:hover {
+    opacity: .8;
+  }
+
+  &:active {
+    transform: scale(.99);
   }
 }
