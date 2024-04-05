@@ -4,7 +4,7 @@ import {ChakraProvider, extendTheme} from "@chakra-ui/react";
 import {App} from "./App.jsx";
 import colors from "./constants/colors.js";
 import {LoadingProvider} from "./context/Loading/index.jsx";
-import {Loading} from "./components/molecules/Loading/index.jsx";
+import {Loading} from "./components/Loading/index.jsx";
 import '@fontsource/poppins';
 import '@fontsource/poppins/100.css';
 import '@fontsource/poppins/200.css';
@@ -14,6 +14,14 @@ import '@fontsource/poppins/500.css';
 import '@fontsource/poppins/600.css';
 import '@fontsource/poppins/800.css';
 import '@fontsource/poppins/900.css';
+import '@fontsource/oswald';
+import '@fontsource/oswald/200.css';
+import '@fontsource/oswald/300.css';
+import '@fontsource/oswald/400.css';
+import '@fontsource/oswald/500.css';
+import '@fontsource/oswald/600.css';
+import {BrowserRouter} from "react-router-dom";
+import {DadosProvider} from "./context/Dados";
 
 const theme = extendTheme({
     fonts: {
@@ -80,11 +88,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
-            <LoadingProvider>
-                <Loading>
-                    <App/>
-                </Loading>
-            </LoadingProvider>
+            <DadosProvider>
+                <LoadingProvider>
+                    <Loading>
+                        <BrowserRouter>
+                            <App/>
+                        </BrowserRouter>
+                    </Loading>
+                </LoadingProvider>
+            </DadosProvider>
         </ChakraProvider>
     </React.StrictMode>,
 )

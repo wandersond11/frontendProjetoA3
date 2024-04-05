@@ -1,10 +1,10 @@
 import {Text} from "@chakra-ui/react";
 import React, {useState} from "react";
 import './styles.scss'
-import colors from "../../../constants/colors";
+import colors from "../../constants/colors";
 import {ChevronDownIcon, ChevronUpIcon} from "@chakra-ui/icons";
 
-export const CustomSelect = (props) => {
+const CustomSelect = (props) => {
     const [open, setOpen] = useState(false)
 
     return (
@@ -20,7 +20,7 @@ export const CustomSelect = (props) => {
                     onClick={() => setOpen(false)}
                     style={{background: colors.secondary}}
                 >
-                    {props?.options.map((value) => {
+                    {props?.options?.map((value) => {
                         return <div onClick={() => props?.onChange(value)}>{value}</div>
                     })}
                 </aside>
@@ -30,3 +30,5 @@ export const CustomSelect = (props) => {
         </>
     )
 }
+
+export default CustomSelect

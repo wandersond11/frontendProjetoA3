@@ -1,0 +1,30 @@
+.custom-input {
+  display: flex;
+  flex-direction: column;
+  background: #00000050;
+  border-radius: 6px;
+  gap: 4px;
+
+  & > :first-child {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    & > p {
+      font-size: 16px
+    }
+  }
+
+  & > :last-child {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    & > p {
+      font-size: 24px;
+      font-weight: bolder;
+      font-family: Oswald, sans-serif;
+    }
+  }
+
+}

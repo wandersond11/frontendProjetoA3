@@ -1,13 +1,24 @@
 import React from 'react';
 import {Home} from "./pages/Home";
 import './styles.scss';
+import {Navigate, Route, Routes} from "react-router-dom";
+import {Dimensionamento} from "./pages/Dimensionamento";
+import colors from "./constants/colors";
 
 export const App = () => {
 
 
     return (
-        <div className="container">
-            <Home/>
+
+        <div
+            className="container"
+            style={{background: colors.secondary}}
+        >
+            <Routes>
+                <Route path="/" element={<Home/>}/>)
+                <Route path="/dimensionamento" element={<Dimensionamento/>}/>)
+                <Route path="*" element={<Navigate to="/"/>}/>
+            </Routes>
         </div>
     );
 };

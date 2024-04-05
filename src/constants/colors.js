@@ -1,7 +1,7 @@
 const colors = {
-  main: "#76d68b",
+  main: "#ff8800",
   secondary: "#303441",
-  tertiary: "#13151c"
+  tertiary: "#3e404f"
 }
 
 export default colors

@@ -1,5 +1,5 @@
 import {CircularProgress} from '@chakra-ui/react'
-import {LoadingContext} from "../../../context/Loading";
+import {LoadingContext} from "../../context/Loading";
 
 export const Loading = ({children}) => (
     <LoadingContext.Consumer>

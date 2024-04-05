@@ -1,0 +1,21 @@
+.dimensionamento-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 2rem;
+
+  & > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  & > button {
+    margin-top: 1rem;
+    align-self: flex-end;
+  }
+}
