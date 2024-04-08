@@ -1,9 +1,11 @@
-import {Input, InputGroup, InputLeftAddon, Text} from "@chakra-ui/react";
-import React from "react";
+import {IconButton, Input, InputGroup, InputLeftAddon, InputRightElement, Text} from "@chakra-ui/react";
+import React, {useState} from "react";
 import './styles.scss'
 import colors from '../../constants/colors';
+import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 
 const CustomInput = (props) => {
+    const [hide, setHide] = useState(false)
 
     return (
         <div className="custom-input">
@@ -16,7 +18,20 @@ const CustomInput = (props) => {
                         {props?.prefix}
                     </InputLeftAddon>
                 }
-                <Input variant="unstyled" {...props}/>
+                <Input
+                    type={hide ? "password" : (props?.type || "text")}
+                    variant="unstyled"
+                    {...props}
+                />
+                {props?.senha &&
+                    <InputRightElement>
+                        <IconButton
+                            icon={hide ? <ViewOffIcon/> : <ViewIcon/>}
+                            variant="ghost"
+                            onClick={() => setHide(!hide)}
+                        />
+                    </InputRightElement>
+                }
             </InputGroup>
         </div>
     )

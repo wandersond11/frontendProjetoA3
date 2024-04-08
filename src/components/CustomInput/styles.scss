@@ -4,6 +4,10 @@
   gap: 4px;
   color: white;
 
+  & > p {
+    color: gray;
+  }
+
   & > div > div {
     font-weight: bold;
     border: none;
@@ -14,6 +18,10 @@
     background: #00000050;
     height: 40px;
     padding: 0 16px;
+  }
+
+  & svg {
+    fill: white
   }
 
 }

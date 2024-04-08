@@ -70,7 +70,11 @@ export const Home = () => {
                                     )
                             })}
                         </aside>
-                        <Button onClick={calcularMedia}>
+                        <Button
+                            w="full"
+                            mt="8px"
+                            onClick={calcularMedia}
+                        >
                             Confirmar
                         </Button>
                     </aside> :
@@ -81,13 +85,13 @@ export const Home = () => {
                             value={infoLocalidade?.media}
                             onChange={(e) => setInfoLocalidadeByKey("media", e.target.value)}
                         />
-                        <Link
-                            color={colors.main}
-                            style={{marginTop: '4px'}}
+                        <Button
+                            variant="link"
+                            mt="2px"
                             onClick={() => setShowMonths(true)}
-                            >
+                        >
                             Não sei minha média
-                        </Link>
+                        </Button>
                     </aside>}
                     <CustomInput
                         label="Custo por kWh"
