@@ -52,47 +52,48 @@ export const Home = () => {
             <div className="calc">
                 <div>
                     {showMonths ?
-                    <aside>
-                        <Text color="white">Media mensal de consumo (kWh)</Text>
                         <aside>
-                            {Object.keys(months).map((key) => {
-                                return (
-                                    <CustomInput
-                                        placeholder={key}
-                                        type="number"
-                                        min={0}
-                                        value={months[key] === 0 ? "" : months[key]}
-                                        onChange={(e) => setMonths({
-                                            ...months,
-                                            [key]: e.target.value === "" ? 0 : e.target.value
-                                        })}
-                                    />
+                            <Text color="white">Media mensal de consumo (kWh)</Text>
+                            <aside>
+                                {Object.keys(months).map((key) => {
+                                    return (
+                                        <CustomInput
+                                            placeholder={key}
+                                            type="number"
+                                            min={0}
+                                            value={months[key] === 0 ? "" : months[key]}
+                                            onChange={(e) => setMonths({
+                                                ...months,
+                                                [key]: e.target.value === "" ? 0 : e.target.value
+                                            })}
+                                        />
                                     )
-                            })}
+                                })}
+                            </aside>
+                            <Button
+                                w="full"
+                                mt="8px"
+                                onClick={calcularMedia}
+                            >
+                                Confirmar
+                            </Button>
+                        </aside> :
+                        <aside>
+                            <CustomInput
+                                label="Media mensal de consumo"
+                                prefix="kWh"
+                                value={infoLocalidade?.media}
+                                onChange={(e) => setInfoLocalidadeByKey("media", e.target.value)}
+                            />
+                            <Button
+                                variant="link"
+                                mt="2px"
+                                onClick={() => setShowMonths(true)}
+                            >
+                                Não sei minha média
+                            </Button>
                         </aside>
-                        <Button
-                            w="full"
-                            mt="8px"
-                            onClick={calcularMedia}
-                        >
-                            Confirmar
-                        </Button>
-                    </aside> :
-                    <aside>
-                        <CustomInput
-                            label="Media mensal de consumo"
-                            prefix="kWh"
-                            value={infoLocalidade?.media}
-                            onChange={(e) => setInfoLocalidadeByKey("media", e.target.value)}
-                        />
-                        <Button
-                            variant="link"
-                            mt="2px"
-                            onClick={() => setShowMonths(true)}
-                        >
-                            Não sei minha média
-                        </Button>
-                    </aside>}
+                    }
                     <CustomInput
                         label="Custo por kWh"
                         prefix="R$"

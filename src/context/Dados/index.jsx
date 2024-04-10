@@ -1,12 +1,12 @@
 import {createContext, useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
 
 export const DadosContext = createContext();
 export const DadosProvider = ({children}) => {
     const [showMonths, setShowMonths] = useState()
+    const [info, setInfo] = useState({})
     const [infoLocalidade, setInfoLocalidade] = useState({})
     const [infoPlanejamento, setInfoPlanejamento] = useState({})
-    const [info, setInfo] = useState({})
+    const [infoInstalacao, setInfoInstalacao] = useState({})
     const [months, setMonths] = useState({
         jan: 0,
         fev: 0,
@@ -64,9 +64,13 @@ export const DadosProvider = ({children}) => {
         }
     }, [infoLocalidade?.cep])
 
-    const setInfoLocalidadeByKey = (key, value) => setInfoLocalidade(obj => { return {...obj, [key]: value} })
+    const setInfoByKey = (key, value, set) => set(obj => { return {...obj, [key]: value} })
 
-    const setInfoPlanejamentoByKey = (key, value) => setInfoPlanejamento(obj => { return {...obj, [key]: value} })
+    const setInfoLocalidadeByKey = (key, value) => setInfoByKey(key, value, setInfoLocalidade)
+
+    const setInfoPlanejamentoByKey = (key, value) => setInfoByKey(key, value, setInfoPlanejamento)
+
+    const setInfoInstalacaoByKey = (key, value) => setInfoByKey(key, value, setInfoPlanejamento)
 
     const calcularMedia = () => {
         let total = 0
@@ -89,6 +93,8 @@ export const DadosProvider = ({children}) => {
                 setInfoLocalidade,
                 infoPlanejamento,
                 setInfoPlanejamento,
+                infoInstalacao,
+                setInfoInstalacao,
                 info,
                 setInfo,
                 months,
