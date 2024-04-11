@@ -19,50 +19,53 @@
     row-gap: 1rem;
     width: 100%;
 
-    &:first-child {
+    &:first-of-type {
 
     }
 
-    &:nth-child(3) {
+    &:nth-of-type(2) {
       display: flex;
       flex-direction: row;
-      gap: 1rem;
+      align-items: end;
+      gap: 2rem;
+
+      & > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        row-gap: 1rem;
+        width: 50%;
+      }
 
       & > aside {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        width: 100%;
-        gap: 4px;
+        justify-content: space-between;
+        background: #00000050;
+        border-radius: .5rem;
+        width: 50%;
+        overflow: hidden;
 
         & > p {
-          color: white;
-          font-size: 42px;
-          font-weight: bolder;
           font-family: Oswald, sans-serif;
-          margin: 1rem 0;
-        }
 
-        & > div {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 32px;
-          width: 100%;
-          background: #00000050;
-          border-radius: .5rem;
+          &:first-of-type {
+            color: white;
+            font-size: 28px;
+            padding: 32px;
+          }
 
-          & > p {
+          &:last-of-type {
             font-size: 42px;
+            padding: 32px;
             font-weight: bolder;
-            font-family: Oswald, sans-serif;
+            color: white;
           }
         }
       }
     }
 
-    &:last-child {
+    &:last-of-type {
       row-gap: 2rem;
     }
   }
@@ -74,6 +77,10 @@
     margin: 2rem 0;
     border-color: #00000050;
     border-width: 1.5px;
+
+    &:first-of-type {
+      margin-bottom: .8rem;
+    }
   }
 
 }

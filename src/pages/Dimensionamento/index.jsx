@@ -104,11 +104,9 @@ export const Dimensionamento = () => {
                         <Text>
                             Total
                         </Text>
-                        <div>
-                            <Text color={colors.green}>
-                                R$ 20020,84{infoPlanejamento?.total}
-                            </Text>
-                        </div>
+                        <Text backgroundColor={colors.green}>
+                            R$ 20020,84{infoPlanejamento?.total}
+                        </Text>
                     </aside>
                 </div>
             }
