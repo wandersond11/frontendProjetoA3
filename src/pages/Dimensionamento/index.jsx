@@ -23,9 +23,11 @@ export const Dimensionamento = () => {
         setInfoPlanejamentoByKey,
         confirmarValores,
         infoInstalacao,
-        infoLocalidade
+        // infoLocalidade 
     } = useContext(DadosContext)    
 
+
+    
     function calcularGeracaoDiariaPainel(horasSol, tensao) {
         // Defina a potência nominal do painel solar (em Wp)
         console.log(modulos[2].valor)
@@ -126,8 +128,16 @@ export const Dimensionamento = () => {
         };
     }
     
+    // const infoLocalidade = {numeroPaineis: 2, custoTotalSistema: 2500, areaTotal: 1, economiaEnergiaMensal: 21, economiaFinanceiraMensal: "19.16"}
 
-    console.log(infoLocalidade)
+  const infoLocalidade = {
+    cep: "38412-324",
+    custo: "0.91",
+    media:"115",
+    endereco: {cep: "38412-324", logradouro: "Alameda José de Oliveira Guimarães", complemento: "", bairro: "Jardim Holanda", localidade: "Uberlândia", },
+    horas: "8",
+    tensao: "129",}
+    console.log(infoLocalidade , "TESTE" )
       
     console.log(calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao))
 
