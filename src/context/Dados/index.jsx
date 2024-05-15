@@ -23,27 +23,69 @@ export const DadosProvider = ({children}) => {
     })
 
     const modulos = [
-        "DAH 550W",
-        "RISEN 660W",
-        "RISEN 605W",
-        "RISEN 550W",
-        "ZNSHINE BIFACIAL (GRAFENO) 665W",
-        "RESUN 560W",
-        "AMERISOLAR 605W",
-        "AMERISOLAR 550W",
-        "AMERISOLAR 450W",
-        "SUNOVA 550W",
-        "LONGI 550W",
-        "TRINA 510W",
-        "TRINA 405W",
-        "ZNSHINE BIFACIAL (GRAFENO) 555W",
-        "ZNSHINE 550W (GRAFENO)",
-        "SUNERGY 570W TOPCON",
-        "AE SOLAR HM6L-60-460W",
-        "OSDA 575W TOPCON",
-        "SENGI 545W (FINAME)",
-        "CANADIAN SOLAR 550W"
-    ]
+        {
+          "nome": "GENERIC 500W",
+          "valor": "510",
+          "preco": "1300",
+          "area": "0.12"
+        },
+        {
+          "nome": "SOLARMAX 600W",
+          "valor": "620",
+          "preco": "1400",
+          "area": "0.5"
+        },
+        {
+          "nome": "POWERLIGHT 550W",
+          "valor": "580",
+          "preco": "1250",
+          "area": "0.5"
+        },
+        {
+          "nome": "SUNPOWER 570W",
+          "valor": "590",
+          "preco": "1350",
+          "area": "0.13"
+        },
+        {
+          "nome": "ECLIPSE 530W",
+          "valor": "540",
+          "preco": "1200",
+          "area": "0.12"
+        },
+        {
+          "nome": "SUNRISE 560W",
+          "valor": "570",
+          "preco": "1300",
+          "area": "0.14"
+        },
+        {
+          "nome": "SUPERNOVA 590W",
+          "valor": "600",
+          "preco": "1450",
+          "area": "0.16"
+        },
+        {
+          "nome": "SOLARIS 520W",
+          "valor": "530",
+          "preco": "1150",
+          "area": "0.13"
+        },
+        {
+          "nome": "SOLARFLARE 580W",
+          "valor": "590",
+          "preco": "1400",
+          "area": "0.15"
+        },
+        {
+          "nome": "SUNBLAZE 540W",
+          "valor": "550",
+          "preco": "1300",
+          "area": "0.14"
+        }
+      ]
+      
+      
     const marcas = ["Solis"]
     const estruturas = ["Aluzinco", "Colonial"]
     const tensoes = ["220V", "380V", "480V", "600V"]

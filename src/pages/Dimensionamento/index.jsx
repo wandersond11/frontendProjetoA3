@@ -22,48 +22,154 @@ export const Dimensionamento = () => {
         fases,
         setInfoPlanejamentoByKey,
         confirmarValores,
-        infoInstalacao
-    } = useContext(DadosContext)
+        infoInstalacao,
+        infoLocalidade
+    } = useContext(DadosContext)    
+
+    function calcularGeracaoDiariaPainel(horasSol, tensao) {
+        // Defina a potência nominal do painel solar (em Wp)
+        console.log(modulos[2].valor)
+        const potenciaPainel = modulos[2].valor; // Exemplo: 400Wp
+      
+        console.log(potenciaPainel, "teste")
+
+        console.log(modulos[2].valor, "valor")
+        console.log(horasSol, "horasSol")
+
+        // Fator de desempenho (entre 0,75 e 0,85)
+        const fatorDesempenho = 0.80;
+      
+        // Cálculo da geração diária por painel
+        const geracaoDiariaPainel = (potenciaPainel * horasSol * fatorDesempenho) / 1000;
+
+
+        console.log(geracaoDiariaPainel, "geracaoDiariaPainel")
+
+        console.log(geracaoDiariaPainel, "teste2")
+      
+        // Ajuste para a tensão do sistema (110V ou 220V)
+        if (tensao === 110) {
+          geracaoDiariaPainel *= 0.85; // Fator de conversão para 110V (aproximado)
+        }
+      
+        console.log(geracaoDiariaPainel, "teste3")
+        return geracaoDiariaPainel;
+    }
+      
+
+    function calcularNumeroPaineis(mediaKwh, geracaoDiariaPainel) {
+        // Considerando 30 dias por mês
+        const diasMes = 30;
+
+        // Cálculo do número de painéis necessários
+        console.log(mediaKwh,geracaoDiariaPainel,mediaKwh / (geracaoDiariaPainel * diasMes))
+        const numeroPainéis = mediaKwh / (geracaoDiariaPainel * diasMes);
+      
+        return Math.ceil(numeroPainéis); // Arredondar para cima
+    }
+
+    function calcularCustoTotalSistema(numeroPainéis) {
+        // Custo estimado por painel solar (em reais)
+        const custoPainel = modulos[2].preco; // Exemplo: R$ 1.500 por painel
+      
+        // Cálculo do custo total do sistema
+        const custoTotalSistema = numeroPainéis * custoPainel;
+      
+        return custoTotalSistema;
+    }      
+
+
+    function calcularaAreaPainel(numeroPainéis) {
+
+        const area = modulos[2].area; 
+      
+
+        const areaTotal = numeroPainéis *area;
+      
+        return areaTotal;
+    }      
+      
+    function calcularConsumoSolar(mediaKwh, valorKwh, horasSol, tensao) {
+        // Validação dos dados de entrada
+        if (!mediaKwh || !valorKwh || !horasSol || !tensao) {
+            throw new Error("Dados inválidos. Preencha todos os campos corretamente.");
+        }
+    
+        // Cálculo da geração diária por painel
+        let geracaoDiariaPainel = calcularGeracaoDiariaPainel(horasSol, tensao);
+    
+        // Cálculo do número de painéis necessários
+        let numeroPaineis = calcularNumeroPaineis(mediaKwh, geracaoDiariaPainel);
+    
+        // Cálculo do custo total do sistema
+        let custoTotalSistema = calcularCustoTotalSistema(numeroPaineis);
+    
+        // Cálculo da área total dos painéis
+        let areaTotal = calcularaAreaPainel(numeroPaineis);
+    
+        // Cálculo da energia gerada pelo sistema solar por mês
+        let energiaGeradaPorMes = geracaoDiariaPainel * 30; // Assumindo 30 dias no mês
+    
+        // Cálculo da economia de energia mensal
+        let economiaEnergiaMensal = mediaKwh - energiaGeradaPorMes;
+    
+        // Cálculo da economia financeira mensal
+        let economiaFinanceiraMensal = economiaEnergiaMensal * valorKwh;
+    
+        // Retorno do resultado
+        return {
+            numeroPaineis: numeroPaineis,
+            custoTotalSistema: custoTotalSistema,
+            areaTotal: areaTotal,
+            economiaEnergiaMensal: economiaEnergiaMensal,
+            economiaFinanceiraMensal: economiaFinanceiraMensal.toFixed(2)
+        };
+    }
+    
+
+    console.log(infoLocalidade)
+      
+    console.log(calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao))
 
     return (
         <div className="dimensionamento-container">
             <div>
-                <CustomInput
+                {/* <CustomInput
                     label="Potência"
                     prefix="kWp"
-                    value={infoPlanejamento?.potencia}
+                    value={calcularKwp(infoLocalidade?.media ,infoLocalidade?.horas, 0.8 )   }
                     onChange={(e) => setInfoPlanejamentoByKey("potencia", e.target.value)}
-                />
+                /> */}
                 <CustomSelect
                     label="Módulo"
-                    options={modulos}
-                    value={infoPlanejamento?.modulo}
+                    options={modulos.map(modulo => modulo.nome)}
+                    value={modulos.map(modulo => modulo.nome)[2]}
                     onChange={(e) => setInfoPlanejamentoByKey("modulo", e)}
                 />
-                <CustomSelect
+                {/* <CustomSelect
                     label="Marca"
                     options={marcas}
                     value={infoPlanejamento?.marca}
                     onChange={(e) => setInfoPlanejamentoByKey("marca", e)}
-                />
-                <CustomSelect
+                /> */}
+                {/* <CustomSelect
                     label="Estrutura"
                     options={estruturas}
                     value={infoPlanejamento?.estrutura}
                     onChange={(e) => setInfoPlanejamentoByKey("estrutura", e)}
-                />
+                /> */}
                 <CustomSelect
                     label="Tensão"
                     options={tensoes}
-                    value={infoPlanejamento?.tensao}
+                    value={infoLocalidade.tensao}
                     onChange={(e) => setInfoPlanejamentoByKey("tensao", e)}
                 />
-                <CustomSelect
+                {/* <CustomSelect
                     label="Fase"
                     options={fases}
                     value={infoPlanejamento?.fase}
                     onChange={(e) => setInfoPlanejamentoByKey("fase", e)}
-                />
+                /> */}
             </div>
             <Button
                 minHeight="40px"
@@ -75,19 +181,22 @@ export const Dimensionamento = () => {
             {Object.keys(infoInstalacao).length + 2 > 0 &&
                 <div>
                     <div>
-                        <CustomInput
+                        {/* <CustomInput
                             label="Instalação"
                             prefix="R$"
                             value={infoPlanejamento?.instalacao}
                             onChange={(e) => setInfoPlanejamentoByKey("instalacao", e.target.value)}
-                        />
+                        /> */}
                         <CustomInput
-                            label="Valor médio do kit"
-                            prefix="R$"
-                            value={infoPlanejamento?.valorMedioKit}
+                            label="Numero de paines"
+                            prefix="Unidade"
+                            value={
+                                calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).numeroPaineis 
+
+                            }
                             onChange={(e) => setInfoPlanejamentoByKey("valorMedioKit", e.target.value)}
                         />
-                        <CustomInput
+                        {/* <CustomInput
                             label="Frete"
                             prefix="R$"
                             value={infoPlanejamento?.frete}
@@ -98,14 +207,17 @@ export const Dimensionamento = () => {
                             prefix="R$"
                             value={infoPlanejamento?.margem}
                             onChange={(e) => setInfoPlanejamentoByKey("margem", e.target.value)}
-                        />
+                        /> */}
                     </div>
                     <aside>
                         <Text>
                             Total
                         </Text>
                         <Text backgroundColor={colors.green}>
-                            R$ 20020,84{infoPlanejamento?.total}
+                           {
+                            calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).custoTotalSistema + 'R$'
+
+                           }{infoPlanejamento?.total}
                         </Text>
                     </aside>
                 </div>
@@ -119,17 +231,22 @@ export const Dimensionamento = () => {
                 />
                 <CardInfo
                     name="Área utilizada"
-                    value={600}
+                    value={
+                        calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).areaTotal 
+                    }
                     suffix="m²"
                 />
                 <CardInfo
                     name="Horas de Sol"
-                    value={5.5}
+                    value={infoLocalidade.horas}
                     suffix=" H"
                 />
                 <CardInfo
                     name="Redução na conta de luz"
-                    value={600}
+                    value={
+                        calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).economiaFinanceiraMensal 
+
+                    }
                     prefix="R$ "
                 />
             </div>

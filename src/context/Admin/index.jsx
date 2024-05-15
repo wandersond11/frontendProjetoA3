@@ -1,5 +1,6 @@
 import {createContext, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import { http } from '../../service/http';
 
 export const AdminContext = createContext();
 export const AdminProvider = ({children}) => {
@@ -24,28 +25,29 @@ export const AdminProvider = ({children}) => {
         dez: 0
     })
 
-    const modulos = [
-        "DAH 550W",
-        "RISEN 660W",
-        "RISEN 605W",
-        "RISEN 550W",
-        "ZNSHINE BIFACIAL (GRAFENO) 665W",
-        "RESUN 560W",
-        "AMERISOLAR 605W",
-        "AMERISOLAR 550W",
-        "AMERISOLAR 450W",
-        "SUNOVA 550W",
-        "LONGI 550W",
-        "TRINA 510W",
-        "TRINA 405W",
-        "ZNSHINE BIFACIAL (GRAFENO) 555W",
-        "ZNSHINE 550W (GRAFENO)",
-        "SUNERGY 570W TOPCON",
-        "AE SOLAR HM6L-60-460W",
-        "OSDA 575W TOPCON",
-        "SENGI 545W (FINAME)",
-        "CANADIAN SOLAR 550W"
-    ]
+    const modulos = {
+        "DAH 550W": "550",
+        "RISEN 660W": "660",
+        "RISEN 605W": "605",
+        "RISEN 550W": "550",
+        "ZNSHINE BIFACIAL (GRAFENO) 665W": "665",
+        "RESUN 560W": "560",
+        "AMERISOLAR 605W": "605",
+        "AMERISOLAR 550W": "550",
+        "AMERISOLAR 450W": "450",
+        "SUNOVA 550W": "550",
+        "LONGI 550W": "550",
+        "TRINA 510W": "510",
+        "TRINA 405W": "405",
+        "ZNSHINE BIFACIAL (GRAFENO) 555W": "555",
+        "ZNSHINE 550W (GRAFENO)": "550",
+        "SUNERGY 570W TOPCON": "570",
+        "AE SOLAR HM6L-60-460W": "460",
+        "OSDA 575W TOPCON": "575",
+        "SENGI 545W (FINAME)": "545",
+        "CANADIAN SOLAR 550W": "550"
+      };
+      
     const marcas = ["Solis"]
     const estruturas = ["Aluzinco", "Colonial"]
     const tensoes = ["220V", "380V", "480V", "600V"]
@@ -82,9 +84,16 @@ export const AdminProvider = ({children}) => {
         navigate("/dimensionamento")
     }
 
-    const login = (navigate) => {
-
-        navigate("/home")
+    const login = async () => {
+        try {
+            const data = await http.post("/usuarios/login",{
+                "nome":user,
+                "senha":senha  
+            })
+            return data 
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

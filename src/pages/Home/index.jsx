@@ -101,6 +101,20 @@ export const Home = () => {
                         onChange={(e) => setInfoLocalidadeByKey("custo", e.target.value)}
                     />
                     <CustomInput
+                        label="Horas de sol"
+                        value={infoLocalidade?.horas}
+                        placeholder="1"
+                        maxLength={9}
+                        onChange={(e) => setInfoLocalidadeByKey("horas", e.target.value)}
+                    />
+                    <CustomInput
+                        label="Tensao"
+                        value={infoLocalidade?.tensao}
+                        placeholder="1"
+                        maxLength={9}
+                        onChange={(e) => setInfoLocalidadeByKey("tensao", e.target.value)}
+                    />
+                    <CustomInput
                         label="CEP"
                         value={infoLocalidade?.cep}
                         placeholder="00000-000"
