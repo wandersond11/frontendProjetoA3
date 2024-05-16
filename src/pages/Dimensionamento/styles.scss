@@ -19,22 +19,19 @@
     row-gap: 1rem;
     width: 100%;
 
-    &:first-of-type {
-
-    }
-
     &:nth-of-type(2) {
       display: flex;
-      flex-direction: row;
-      align-items: end;
+      flex-direction: column;
+      align-items: center;
       gap: 2rem;
 
       & > div {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        row-gap: 1rem;
-        width: 50%;
+        display: flex;
+        width: 100%;
+
+        & > * {
+          width: 100%
+        }
       }
 
       & > aside {
@@ -43,7 +40,7 @@
         justify-content: space-between;
         background: #00000050;
         border-radius: .5rem;
-        width: 50%;
+        width: 100%;
         overflow: hidden;
 
         & > p {
@@ -70,8 +67,6 @@
     }
   }
 
-
-
   & > hr {
     width: calc(100% - 4px);
     margin: 2rem 0;
@@ -82,5 +77,4 @@
       margin-bottom: .8rem;
     }
   }
-
 }

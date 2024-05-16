@@ -42,7 +42,7 @@ export const Dimensionamento = () => {
         const fatorDesempenho = 0.80;
       
         // Cálculo da geração diária por painel
-        const geracaoDiariaPainel = (potenciaPainel * horasSol * fatorDesempenho) / 1000;
+        let geracaoDiariaPainel = (potenciaPainel * horasSol * fatorDesempenho) / 1000;
 
 
         console.log(geracaoDiariaPainel, "geracaoDiariaPainel")
@@ -198,7 +198,7 @@ export const Dimensionamento = () => {
                             onChange={(e) => setInfoPlanejamentoByKey("instalacao", e.target.value)}
                         /> */}
                         <CustomInput
-                            label="Numero de paines"
+                            label="Numero de painéis"
                             prefix="Unidade"
                             value={
                                 calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).numeroPaineis 
@@ -224,10 +224,8 @@ export const Dimensionamento = () => {
                             Total
                         </Text>
                         <Text backgroundColor={colors.green}>
-                           {
-                            calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).custoTotalSistema + 'R$'
-
-                           }{infoPlanejamento?.total}
+                           {calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).custoTotalSistema + 'R$'}
+                           {infoPlanejamento?.total}
                         </Text>
                     </aside>
                 </div>

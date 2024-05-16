@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Home} from "./pages/Home";
 import {Login} from "./pages/Login";
 import {Dimensionamento} from "./pages/Dimensionamento";
 import './styles.scss';
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes, redirect} from "react-router-dom";
 import colors from "./constants/colors";
+import {LoginContext} from "./context/Login";
 
 export const App = () => {
+    const {
+        logged
+    } = useContext(LoginContext)
 
+    if (!logged) {
+        return redirect("/login");
+    }
 
     return (
-
         <div
             className="container"
             style={{background: colors.secondary}}

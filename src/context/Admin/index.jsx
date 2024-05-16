@@ -8,8 +8,6 @@ export const AdminProvider = ({children}) => {
     const [infoLocalidade, setInfoLocalidade] = useState({})
     const [infoPlanejamento, setInfoPlanejamento] = useState({})
     const [info, setInfo] = useState({})
-    const [user, setUser] = useState("")
-    const [senha, setSenha] = useState("")
     const [months, setMonths] = useState({
         jan: 0,
         fev: 0,
@@ -84,18 +82,6 @@ export const AdminProvider = ({children}) => {
         navigate("/dimensionamento")
     }
 
-    const login = async () => {
-        try {
-            const data = await http.post("/usuarios/login",{
-                "nome":user,
-                "senha":senha  
-            })
-            return data 
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     return (
         <AdminContext.Provider
             value={{
@@ -118,11 +104,6 @@ export const AdminProvider = ({children}) => {
                 setInfoPlanejamentoByKey,
                 calcularMedia,
                 confirmarValores,
-                user,
-                setUser,
-                senha,
-                setSenha,
-                login
             }}
         >
             {children}

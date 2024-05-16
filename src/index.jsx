@@ -23,6 +23,7 @@ import '@fontsource/oswald/600.css';
 import {BrowserRouter} from "react-router-dom";
 import {DadosProvider} from "./context/Dados";
 import {AdminProvider} from "./context/Admin";
+import {LoginProvider} from "./context/Login";
 
 const theme = extendTheme({
     fonts: {
@@ -89,17 +90,19 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
         <ChakraProvider theme={theme}>
-            <AdminProvider>
-                <DadosProvider>
-                    <LoadingProvider>
-                        <Loading>
-                            <BrowserRouter>
-                                <App/>
-                            </BrowserRouter>
-                        </Loading>
-                    </LoadingProvider>
-                </DadosProvider>
-            </AdminProvider>
+            <LoginProvider>
+                <AdminProvider>
+                    <DadosProvider>
+                        <LoadingProvider>
+                            <Loading>
+                                <BrowserRouter>
+                                    <App/>
+                                </BrowserRouter>
+                            </Loading>
+                        </LoadingProvider>
+                    </DadosProvider>
+                </AdminProvider>
+            </LoginProvider>
         </ChakraProvider>
     </React.StrictMode>,
 )

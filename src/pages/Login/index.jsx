@@ -1,40 +1,41 @@
-import React, { useContext, useState } from 'react';
-import { LoadingContext } from "../../context/Loading";
-import { useNavigate } from "react-router-dom";
-import { AdminContext } from "../../context/Admin";
-import { Button, Text, Alert } from "@chakra-ui/react";
+import React, {useContext, useState} from 'react';
+import {LoadingContext} from "../../context/Loading";
+import {useNavigate} from "react-router-dom";
+import {AdminContext} from "../../context/Admin";
+import {Button, Text, Alert} from "@chakra-ui/react";
 import CustomInput from "../../components/CustomInput";
+import {LoginContext} from "../../context/Login";
 import './styles.scss'
 
 export const Login = () => {
-    const { setLoading } = useContext(LoadingContext)
+    const {setLoading} = useContext(LoadingContext)
     const navigate = useNavigate()
 
     const {
+        loginError,
+        setLoginError,
+        login,
         user,
         setUser,
         senha,
         setSenha,
-        login
-    } = useContext(AdminContext)
-
-    const [loginError, setLoginError] = useState(false);
+    } = useContext(LoginContext)
 
     const handleLogin = async () => {
-        setLoading(true); // Assuming you have a loading state for login attempts
+        setLoading(true);
 
         try {
-            const user =   await login(); // Call the login function with potential navigation
-            if(user){ 
-                setLoginError(false); // Clear error if login succeeds
+            const user = await login();
+            if (user) {
+                setLoginError(false);
                 navigate("/")
-            }else{
-                setLoginError(true); // Set error state if login fails (consider more specific error handling if possible)
-            }  
+            } else {
+                setLoginError(true);
+            }
         } catch (error) {
-            setLoginError(true); // Set error state if login fails (consider more specific error handling if possible)
+            setLoginError(true);
         } finally {
-            setLoading(false); // Reset loading state
+            setLoading(false);
         }
     };
 
@@ -58,7 +59,7 @@ export const Login = () => {
                         Usuário ou senha incorretos. Tente novamente.
                     </Alert>
                 )}
-                <Button onClick={handleLogin}>
+                <Button mt="4" onClick={handleLogin}>
                     Confirmar
                 </Button>
             </div>
