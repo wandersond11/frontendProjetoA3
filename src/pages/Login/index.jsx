@@ -11,6 +11,8 @@ export const Login = () => {
     const {setLoading} = useContext(LoadingContext)
     const navigate = useNavigate()
 
+    console.log("entrou")
+
     const {
         loginError,
         setLoginError,

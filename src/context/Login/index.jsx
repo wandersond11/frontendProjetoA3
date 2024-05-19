@@ -6,11 +6,12 @@ export const LoginContext = createContext();
 export const LoginProvider = ({children}) => {
     const [loginError, setLoginError] = useState(false);
     const [logged, setLogged] = useState(false);
-    const [user, setUser] = useState("")
-    const [senha, setSenha] = useState("")
+    const [user, setUser] = useState("joao")
+    const [senha, setSenha] = useState("teste")
 
     const login = async () => {
         try {
+            console.log("CHAMOU")
             const data = await http.post("/usuarios/login",{
                 "nome": user,
                 "senha": senha

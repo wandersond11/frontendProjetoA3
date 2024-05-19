@@ -25,61 +25,61 @@ export const DadosProvider = ({children}) => {
     const modulos = [
         {
           "nome": "GENERIC 500W",
-          "valor": "510",
-          "preco": "1300",
+          "valor": "500",
+          "preco": "800",
           "area": "0.12"
         },
         {
           "nome": "SOLARMAX 600W",
-          "valor": "620",
+          "valor": "600",
           "preco": "1400",
           "area": "0.5"
         },
         {
           "nome": "POWERLIGHT 550W",
-          "valor": "580",
+          "valor": "550",
           "preco": "1250",
           "area": "0.5"
         },
         {
           "nome": "SUNPOWER 570W",
-          "valor": "590",
+          "valor": "570",
           "preco": "1350",
           "area": "0.13"
         },
         {
           "nome": "ECLIPSE 530W",
-          "valor": "540",
+          "valor": "530",
           "preco": "1200",
           "area": "0.12"
         },
         {
           "nome": "SUNRISE 560W",
-          "valor": "570",
+          "valor": "560",
           "preco": "1300",
           "area": "0.14"
         },
         {
           "nome": "SUPERNOVA 590W",
-          "valor": "600",
+          "valor": "590",
           "preco": "1450",
           "area": "0.16"
         },
         {
           "nome": "SOLARIS 520W",
-          "valor": "530",
+          "valor": "520",
           "preco": "1150",
           "area": "0.13"
         },
         {
           "nome": "SOLARFLARE 580W",
-          "valor": "590",
+          "valor": "580",
           "preco": "1400",
           "area": "0.15"
         },
         {
           "nome": "SUNBLAZE 540W",
-          "valor": "550",
+          "valor": "540",
           "preco": "1300",
           "area": "0.14"
         }
@@ -88,7 +88,7 @@ export const DadosProvider = ({children}) => {
       
     const marcas = ["Solis"]
     const estruturas = ["Aluzinco", "Colonial"]
-    const tensoes = ["220V", "380V", "480V", "600V"]
+    const tensoes = ["110V", "220V"]
     const fases = ["Monofásico", "Bifásico", "Trifásico"]
 
     useEffect(() => {

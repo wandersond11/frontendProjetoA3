@@ -7,6 +7,8 @@ import painelSolar1 from '../../assets/painel-solar-1.jpg'
 import painelSolar2 from '../../assets/painel-solar-2.jpg'
 import painelSolar3 from '../../assets/painel-solar-3.jpg'
 import painelSolar4 from '../../assets/painel-solar-4.jpg'
+import CustomSelect from "../../components/CustomSelect";
+
 import colors from '../../constants/colors';
 import {DadosContext} from "../../context/Dados";
 import {useNavigate} from "react-router-dom";
@@ -20,7 +22,10 @@ export const Home = () => {
         setMonths,
         setInfoLocalidadeByKey,
         calcularMedia,
+        tensoes,
     } = useContext(DadosContext)
+
+
 
     const navigate = useNavigate()
 
@@ -107,13 +112,15 @@ export const Home = () => {
                         maxLength={9}
                         onChange={(e) => setInfoLocalidadeByKey("horas", e.target.value)}
                     />
-                    <CustomInput
-                        label="Tensao"
+
+                    
+                    <CustomSelect
+                        label="Tensão"
+                        options={tensoes}
                         value={infoLocalidade?.tensao}
-                        placeholder="1"
-                        maxLength={9}
-                        onChange={(e) => setInfoLocalidadeByKey("tensao", e.target.value)}
+                        onChange={(e) => setInfoLocalidadeByKey("tensao", e)}
                     />
+
                     <CustomInput
                         label="CEP"
                         value={infoLocalidade?.cep}
