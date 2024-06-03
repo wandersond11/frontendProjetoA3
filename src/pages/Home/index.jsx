@@ -72,7 +72,7 @@ export const Home = () => {
                             </aside>
                             <Button
                                 w="full"
-                                mt="8px"
+                                mt="4"
                                 onClick={calcularMedia}
                             >
                                 Confirmar
@@ -144,7 +144,7 @@ export const Home = () => {
                             onChange={(e) => setInfoLocalidadeByKey("endereco", {...infoLocalidade?.endereco, numero: e.target.value})}
                         />
                     </>}
-                    <Button onClick={() => navigate("/dimensionamento")}>
+                    <Button mt="4" onClick={() => navigate("/dimensionamento")}>
                         Confirmar
                     </Button>
                 </div>

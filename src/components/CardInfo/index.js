@@ -11,7 +11,7 @@ const CardInfo = (props) => {
             <div>
                 <Text>{props?.name}</Text>
             </div>
-            <div style={{background: colors.main}}>
+            <div style={{background: props?.color ? props?.color : colors.main}}>
                 <Text>
                     {(props?.prefix || "") + props?.value + (props?.suffix || "")}
                 </Text>

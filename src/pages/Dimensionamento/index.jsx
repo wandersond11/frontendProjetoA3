@@ -180,6 +180,14 @@ export const Dimensionamento = () => {
                     value={infoPlanejamento?.fase}
                     onChange={(e) => setInfoPlanejamentoByKey("fase", e)}
                 /> */}
+                <CustomInput
+                    label="Numero de painéis"
+                    prefix="Unidade"
+                    value={
+                        calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).numeroPaineis
+                    }
+                    onChange={(e) => setInfoPlanejamentoByKey("valorMedioKit", e.target.value)}
+                />
             </div>
             <Button
                 minHeight="40px"
@@ -187,7 +195,7 @@ export const Dimensionamento = () => {
             >
                 Dimensionar
             </Button>
-            <Divider/>
+            <Divider mb="4px"/>
             {Object.keys(infoInstalacao).length + 2 > 0 &&
                 <div>
                     <div>
@@ -197,15 +205,6 @@ export const Dimensionamento = () => {
                             value={infoPlanejamento?.instalacao}
                             onChange={(e) => setInfoPlanejamentoByKey("instalacao", e.target.value)}
                         /> */}
-                        <CustomInput
-                            label="Numero de paines"
-                            prefix="Unidade"
-                            value={
-                                calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).numeroPaineis 
-
-                            }
-                            onChange={(e) => setInfoPlanejamentoByKey("valorMedioKit", e.target.value)}
-                        />
                         {/* <CustomInput
                             label="Frete"
                             prefix="R$"
@@ -219,20 +218,8 @@ export const Dimensionamento = () => {
                             onChange={(e) => setInfoPlanejamentoByKey("margem", e.target.value)}
                         /> */}
                     </div>
-                    <aside>
-                        <Text>
-                            Total
-                        </Text>
-                        <Text backgroundColor={colors.green}>
-                           {
-                            calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).custoTotalSistema + 'R$'
-
-                           }{infoPlanejamento?.total}
-                        </Text>
-                    </aside>
                 </div>
             }
-            <Divider/>
             <div>
                 <CardInfo
                     name="Kit dimensionado"
@@ -255,11 +242,20 @@ export const Dimensionamento = () => {
                     name="Redução na conta de luz"
                     value={
                         calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).economiaFinanceiraMensal 
-
                     }
                     prefix="R$ "
+                />
+                <CardInfo
+                    name="Total"
+                    value={`
+                        ${calcularConsumoSolar(infoLocalidade.media,infoLocalidade.custo ,infoLocalidade.horas,infoLocalidade.tensao).custoTotalSistema}
+                    `}
+                    prefix="R$ "
+                    color={colors.green}
                 />
             </div>
         </div>
     );
 };
+
+//${infoPlanejamento?.total}

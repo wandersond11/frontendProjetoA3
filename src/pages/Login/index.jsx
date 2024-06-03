@@ -58,7 +58,7 @@ export const Login = () => {
                         Usuário ou senha incorretos. Tente novamente.
                     </Alert>
                 )}
-                <Button onClick={handleLogin}>
+                <Button mt="4" onClick={handleLogin}>
                     Confirmar
                 </Button>
             </div>
