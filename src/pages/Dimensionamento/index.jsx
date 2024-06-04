@@ -21,6 +21,7 @@ export const Dimensionamento = () => {
         estruturas,
         tensoes,
         fases,
+        setInfoPlanejamentoByKey,
         setInfoLocalidadeByKey,
         confirmarValores,
         infoInstalacao,
@@ -225,40 +226,30 @@ export const Dimensionamento = () => {
                     onChange={(e) => setInfoLocalidadeByKey("modulo", e)}
                 />
                 <CustomSelect
-                        label="Tensão"
-                        options={tensoes}
-                        value={infoLocalidade?.tensao}
-                        onChange={(e) => setInfoLocalidadeByKey("tensao", e)}
-                    />
+                    label="Tensão"
+                    options={tensoes}
+                    value={infoLocalidade?.tensao}
+                    onChange={(e) => setInfoLocalidadeByKey("tensao", e)}
+                />
+                {Object.keys(infoInstalacao).length + 2 > 0 &&
+                    <div>
+                        <div>
+                            <CustomInput
+                                label="Numero de painéis"
+                                prefix="Unidade"
+                                value={dados.numeroPaineis }
+                                onChange={(e) => setInfoPlanejamentoByKey("valorMedioKit", e.target.value)}
+                            />
+                        </div>
+                    </div>
+                }
             </div>
-            <Button
+            {/* <Button
                 minHeight="40px"
                 onClick={() => confirmarValores(navigate)}
             >
                 Dimensionar
-            </Button>
-            <Divider/>
-            {Object.keys(infoInstalacao).length + 2 > 0 &&
-                <div>
-                    <div>
-                        <CustomInput
-                            label="Numero de painéis"
-                            prefix="Unidade"
-                            value={dados.numeroPaineis }
-                            onChange={(e) => setInfoPlanejamentoByKey("valorMedioKit", e.target.value)}
-                        />
-                    </div>
-                    <aside>
-                        <Text>
-                            Total
-                        </Text>
-                        <Text backgroundColor={colors.green}>
-                           {dados.custoTotalSistema + 'R$'}
-                           {infoPlanejamento?.total}
-                        </Text>
-                    </aside>
-                </div>
-            }
+            </Button> */}
             <Divider/>
             <div>
                 <CardInfo
@@ -280,8 +271,15 @@ export const Dimensionamento = () => {
                 />
                 <CardInfo
                     name="Redução na conta de luz"
-                    value={dados.economiaFinanceiraMensal}
+                    value={dados.economiaFinanceiraMensal?.toFixed(2)}
                     prefix="R$ "
+                />
+                <CardInfo
+                    name="Total"
+                    value={`
+                    ${'R$' + dados.custoTotalSistema?.toFixed(2)}
+                    `}
+                    color={colors.green}
                 />
             </div>
         </div>

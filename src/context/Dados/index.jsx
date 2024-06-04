@@ -272,8 +272,8 @@ export const DadosProvider = ({children}) => {
     }
 
     const confirmarValores = (navigate) => {
-        setInfo({...infoLocalidade, ...infoPlanejamento})
-        navigate("/dimensionamento")
+      setInfo({...infoLocalidade, ...infoPlanejamento})
+      navigate("/dimensionamento")
     }
 
     return (
@@ -298,6 +298,7 @@ export const DadosProvider = ({children}) => {
                 fases,
                 setInfoLocalidadeByKey,
                 setInfoPlanejamentoByKey,
+                setInfoInstalacaoByKey,
                 calcularMedia,
                 confirmarValores,
             }}

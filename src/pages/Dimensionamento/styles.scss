@@ -14,56 +14,26 @@
 
   & > div {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
     row-gap: 1rem;
     width: 100%;
 
-    &:nth-of-type(2) {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-
-      & > div {
-        display: flex;
-        width: 100%;
-
-        & > * {
-          width: 100%
-        }
-      }
-
-      & > aside {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #00000050;
-        border-radius: .5rem;
-        width: 100%;
-        overflow: hidden;
-
-        & > p {
-          font-family: Oswald, sans-serif;
-
-          &:first-of-type {
-            color: white;
-            font-size: 28px;
-            padding: 32px;
-          }
-
-          &:last-of-type {
-            font-size: 42px;
-            padding: 32px;
-            font-weight: bolder;
-            color: white;
-          }
-        }
-      }
+    &:last-of-type {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 2rem;
     }
 
-    &:last-of-type {
-      row-gap: 2rem;
+  }
+
+  @media only screen and (max-width: 960px) {
+    & > div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    & > button {
+      width: 100%;
     }
   }
 
@@ -72,9 +42,32 @@
     margin: 2rem 0;
     border-color: #00000050;
     border-width: 1.5px;
+  }
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #00000050;
+  border-radius: .5rem;
+  overflow: hidden;
+
+  & > p {
+    font-family: Oswald, sans-serif;
+    vertical-align: middle;
 
     &:first-of-type {
-      margin-bottom: .8rem;
+      color: white;
+      font-size: 28px;
+      height: 100%;
+    }
+
+    &:last-of-type {
+      font-size: 42px;
+      font-weight: bolder;
+      color: white;
+      height: 100%;
     }
   }
 }

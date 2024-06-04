@@ -6,7 +6,7 @@ export const LoginContext = createContext();
 export const LoginProvider = ({children}) => {
     const [loginError, setLoginError] = useState(false);
     const [logged, setLogged] = useState(false);
-    const [user, setUser] = useState("joao")
+    const [user, setUser] = useState("wandersonTeste")
     const [senha, setSenha] = useState("teste")
 
     const login = async () => {
@@ -16,7 +16,7 @@ export const LoginProvider = ({children}) => {
                 "nome": user,
                 "senha": senha
             })
-            if (data.request.response === 200) {
+            if (data.request.status === 200) {
                 setLogged(true)
                 localStorage.setItem("logged", true)
             }
